@@ -15,9 +15,14 @@ export const margins = {
 };
 
 export const WhiteBaseContainer = styled.div`
-  background-color: azure;
   align-content: center;
   align-items: center;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding-top: ${margins.size5};
+  padding-bottom: ${margins.size5};
 `;
 
 export interface TextType {
