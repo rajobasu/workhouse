@@ -2,10 +2,14 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { emptyUser, PostUserInfoPayload, UserProfile } from "./Models";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {app} from "../Firebase_config";
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+
 
 //used for user login 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+//used to get user profile
+const db = getFirestore();
 
 const noop = () => {
   console.error("App context provider not presented");
@@ -35,8 +39,8 @@ export const useUser = () => {
 };
 
 export const AppProvider: React.FC = ({ children }) => {
-  const [userAcc, setUserAcc] = useState<any>(null)  
-  const [user, setUser] = useState<UserProfile>(emptyUser);
+  const [userAcc, setUserAcc] = useState<any>()  
+  const [user, setUser] = useState<UserProfile | any>(emptyUser);
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -52,7 +56,7 @@ export const AppProvider: React.FC = ({ children }) => {
     return unsubscribe
   }, [])
 
-  const fetchUser = () => {
+  const fetchUser = async () => {
     setUser(emptyUser);
     return Promise.reject(); // TODO this needs to be updated
   };
@@ -60,21 +64,40 @@ export const AppProvider: React.FC = ({ children }) => {
     setUser(emptyUser);
     return Promise.reject(); // TODO this needs to be updated
   };
-//Google signin with pop-up, setting user as the returned O-Auth token
+  //Google signin with pop-up, setting user as the returned O-Auth token
   const login = () => {
       signInWithPopup(auth, provider)
-      .then((result) => {
+      .then( async (result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         if(credential) {
             const token = credential.accessToken;
             //console.log("token -> " + token)
         }
-        if(result.user) {
-            setUserAcc(result.user);
-            
+
+        if(result.user && result.user.email && result.user.displayName) {
+            const email = result.user.email
+            const displayName = result.user.displayName
+            const userRef = doc(db, "users", email);
+            const docSnap = await getDoc(userRef);
+            if(docSnap.exists()) {
+                console.log('Existing user: ' + docSnap.data())
+                setUser(docSnap.data());
+            } else {
+                console.log("new user")
+                const userProfileData: UserProfile = {
+                            name: displayName,
+                            email: email,
+                            points: 0,
+                            verified: 1
+                };
+                await setDoc(doc(db, "users", email), userProfileData);
+                setUserAcc(result.user)
+                setUser(userProfileData)
+            }
         }
       }).catch((error) => {
         const errorMessage = error.message;
+        console.error(errorMessage)
       }); 
   }
 
