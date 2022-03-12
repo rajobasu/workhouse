@@ -1,17 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_apiKey,
-  authDomain: process.env.REACT_APP_authDomain,
-  projectId: process.env.REACT_APP_projectId,
-  storageBucket: process.env.REACT_APP_storageBucket,
-  messagingSenderId: process.env.REACT_APP_messagingSenderId,
-  appId: process.env.REACT_APP_appId
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp({
+  apiKey: "AIzaSyBKQTb8HYmhCE7sKU7RMHfVSjeOzqQP_Y0",
+  authDomain: "yeeeeeeeet-942a7.firebaseapp.com",
+  projectId: "yeeeeeeeet-942a7",
+  storageBucket: "yeeeeeeeet-942a7.appspot.com",
+  messagingSenderId: "968125307153",
+  appId: "1:566229235772:web:aeb002d210d61cd93b2b39"
+});

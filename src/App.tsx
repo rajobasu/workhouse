@@ -6,18 +6,21 @@ import { Login } from "./components/Login";
 import { Donate } from "./components/Donate";
 import { Volunteer } from "./components/Volunteer";
 import { Metaverse } from "./components/Metaverse";
+import {AppProvider} from "./context/AppContext"
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path={"/"} element={<LandingPage />} />
-        <Route path={"/dashboard"} element={<Dashboard />} />
-        <Route path={"/login"} element={<Login />} />
-        <Route path={"/donate"} element={<Donate />} />
-        <Route path={"/volunteer"} element={<Volunteer />} />
-        <Route path={"/metaverse"} element={<Metaverse />} />
-      </Routes>
+      <AppProvider>
+        <Routes>
+          <Route path={"/"} element={<LandingPage />} />
+          <Route path={"/dashboard"} element={<Dashboard />} />
+          <Route path={"/login"} element={<Login />} />
+          <Route path={"/donate"} element={<Donate />} />
+          <Route path={"/volunteer"} element={<Volunteer />} />
+          <Route path={"/metaverse"} element={<Metaverse />} />
+        </Routes>
+      </AppProvider>
     </BrowserRouter>
   );
 }
