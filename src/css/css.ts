@@ -35,3 +35,17 @@ export const Text = styled.p<TextType>`
   color: ${(p) => p.color || colors.black};
   margin-bottom: ${margins.size2};
 `;
+
+export const FlexRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 10px;
+`;
+
+export const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+`;
