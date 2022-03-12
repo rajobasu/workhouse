@@ -91,9 +91,9 @@ export const AppProvider: React.FC = ({ children }) => {
                             verified: 1
                 };
                 await setDoc(doc(db, "users", email), userProfileData);
-                setUserAcc(result.user)
                 setUser(userProfileData)
             }
+            setUserAcc(result.user)
         }
       }).catch((error) => {
         const errorMessage = error.message;
