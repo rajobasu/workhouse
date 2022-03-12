@@ -16,12 +16,16 @@ const AppContext = createContext<{
   user: UserProfile | undefined;
   updateUser: (userInfo: PostUserInfoPayload) => Promise<UserProfile>;
   fetchUser: () => Promise<UserProfile>;
-  login: () => void
+  login: () => void;
+  logout: () => void;
+  userAcc: any | undefined
 }>({
   user: undefined,
   updateUser: noop,
   fetchUser: noop,
-  login: () => {}
+  login: () => {},
+  logout: () => {},
+  userAcc: null
 });
 
 export const useAppContext = () => useContext(AppContext);
@@ -31,14 +35,16 @@ export const useUser = () => {
 };
 
 export const AppProvider: React.FC = ({ children }) => {
-  const [userAcc, setUserAcc] = useState<any>()  
+  const [userAcc, setUserAcc] = useState<any>(null)  
   const [user, setUser] = useState<UserProfile>(emptyUser);
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
-        if(user) {
-            console.log(user)
+        if (user) {
+            setUserAcc(user)
+            console.log("curr user:" + user.displayName)
         } else {
+            setUserAcc(null)
             console.log("no user")
         }
         setLoading(false)
@@ -63,14 +69,21 @@ export const AppProvider: React.FC = ({ children }) => {
             const token = credential.accessToken;
             //console.log("token -> " + token)
         }
-        setUserAcc(result.user);
+        if(result.user) {
+            setUserAcc(result.user);
+            
+        }
       }).catch((error) => {
         const errorMessage = error.message;
       }); 
   }
 
+  const logout = () => {
+    auth.signOut()
+  }
+
   return (
-    <AppContext.Provider value={{ user, updateUser, fetchUser, login }}>
+    <AppContext.Provider value={{ user, updateUser, fetchUser, login, logout, userAcc}}>
       {! loading && children}
     </AppContext.Provider>
   );
