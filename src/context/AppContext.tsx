@@ -57,12 +57,29 @@ export const AppProvider: React.FC = ({ children }) => {
   }, [])
 
   const fetchUser = async () => {
-    setUser(emptyUser);
-    return Promise.reject(); // TODO this needs to be updated
+    if(userAcc) {
+      const userRef = doc(db, "users", userAcc.email);
+      const docSnap = await getDoc(userRef); 
+      if(docSnap.exists()) {
+        setUser(docSnap.data());
+      } else {
+        const userProfileData: UserProfile = {
+                    name: userAcc.displayName,
+                    email: userAcc.email,
+                    points: 0,
+                    verified: 1
+        };
+        await setDoc(doc(db, "users", userAcc.email), userProfileData);
+        setUser(userProfileData)
+      }
+    } else {
+      setUser(emptyUser)
+    }
   };
-  const updateUser = (newUserInfo: PostUserInfoPayload) => {
-    setUser(emptyUser);
-    return Promise.reject(); // TODO this needs to be updated
+  const updateUser = async (newUserInfo: PostUserInfoPayload) => {
+    if(newUserInfo.email) {
+      await setDoc(doc(db, "users", newUserInfo.email), newUserInfo);
+    }
   };
   //Google signin with pop-up, setting user as the returned O-Auth token
   const login = () => {
