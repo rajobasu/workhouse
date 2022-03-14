@@ -50,15 +50,21 @@ export const LandingPage: React.FC = () => {
             }}
           >
             <Descriptor>
-              Unfortunately,not everyone has a decent home to live in!
+              The unfortunate reality is that many people don’t have the
+              opportunity to feel the comfort and reassurance that a home brings
+              with itself.
             </Descriptor>
             <Descriptor>
-              Everytime you workout, we match your effort in donations!
+              Help us in building roofs over people’s heads and ensuring that
+              genuine smiles adorn the faces of several.
             </Descriptor>
-            <Descriptor>
-              Donate and volunteer to promote decent habitat for all!
+            <Descriptor style={{ fontSize: "smaller", marginTop: "15px" }}>
+              Just knowing that one has a home to go back to, at the end of a
+              tiring day, can bring the widest smile onto the faces of several.
+              Many don’t have that luxury especially when they should. Let’s
+              come together with Habitat for Humanity Singapore to tackle one of
+              United Nation’s sustainable goals for 2030- poverty.
             </Descriptor>
-            <Descriptor> Earn points and NFTs by helping others!</Descriptor>
           </FlexColumn>
         </FlexRow>
 
@@ -102,17 +108,16 @@ const Descriptor = styled(Text)`
   align-content: start;
   align-items: start;
   text-align: start;
-  font-weight: bold;
   margin-top: ${margins.size1};
   margin-bottom: ${margins.size1};
   justify-content: left;
   color: white;
-  width: 100%;
+  width: 500px;
 `;
 
 const SessionButton = styled(FullButton)`
   margin-top: ${margins.size6};
-  width: 300px;
+  width: 600px;
   height: 100%;
   margin-right: ${margins.size3};
   margin-left: ${margins.size3};
