@@ -2,7 +2,7 @@ import React, {createContext, useContext, useEffect, useState} from "react";
 import {emptyUser, PostUserInfoPayload, UserProfile} from "./Models";
 import {getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import {app} from "../Firebase_config";
-import {doc, getDoc, getFirestore, setDoc} from "firebase/firestore";
+import {doc, getDoc, getFirestore, setDoc} from "firebase/firestore"; //used for user login
 
 //used for user login
 const auth = getAuth(app);
@@ -16,14 +16,14 @@ const noop = () => {
 };
 
 const AppContext = createContext<{
-  user: UserProfile | undefined;
-  updateUser: (userInfo: PostUserInfoPayload) => void;
-  fetchUser: () => void;
+  user: UserProfile;
+  updateUser: (userInfo: PostUserInfoPayload) => Promise<UserProfile>;
+  fetchUser: () => Promise<UserProfile>;
   login: () => void;
   logout: () => void;
   userAcc: any | undefined;
 }>({
-  user: undefined,
+  user: emptyUser,
   updateUser: noop,
   fetchUser: noop,
   login: () => {},
@@ -46,6 +46,7 @@ export const AppProvider: React.FC = ({ children }) => {
       if (user) {
         setUserAcc(user);
         console.log("curr user:" + user.displayName);
+        fetchUserFromAuthState(user);
       } else {
         setUserAcc(null);
         console.log("no user");
@@ -54,30 +55,44 @@ export const AppProvider: React.FC = ({ children }) => {
     });
   }, []);
 
-  const fetchUser = async () => {
-    if(userAcc) {
+  const fetchUserFromAuthState = async (userAcc: any) => {
+    if (userAcc) {
+      console.log("trying to fetch user again");
       const userRef = doc(db, "users", userAcc.email);
-      const docSnap = await getDoc(userRef); 
-      if(docSnap.exists()) {
+      const docSnap = await getDoc(userRef);
+      if (docSnap.exists()) {
         setUser(docSnap.data());
+        return docSnap.data() as UserProfile;
       } else {
         const userProfileData: UserProfile = {
-                    name: userAcc.displayName,
-                    email: userAcc.email,
-                    points: 0,
-                    verified: 1
+          name: userAcc.displayName,
+          email: userAcc.email,
+          points: 0,
+          verified: 1,
         };
         await setDoc(doc(db, "users", userAcc.email), userProfileData);
-        setUser(userProfileData)
+        setUser(userProfileData);
+        return userProfileData;
       }
     } else {
-      setUser(emptyUser)
+      setUser(emptyUser);
+      return emptyUser;
     }
   };
+
+  const fetchUser = async () => {
+    return fetchUserFromAuthState(userAcc);
+  };
   const updateUser = async (newUserInfo: PostUserInfoPayload) => {
-    if(newUserInfo.email) {
+    if (newUserInfo.email === undefined) newUserInfo.email = user.email;
+    if (newUserInfo.name === undefined) newUserInfo.name = user.name;
+    if (newUserInfo.points === undefined) newUserInfo.points = user.points;
+    newUserInfo.verified = 1;
+
+    if (newUserInfo.email) {
       await setDoc(doc(db, "users", newUserInfo.email), newUserInfo);
     }
+    return fetchUser();
   };
   //Google signin with pop-up, setting user as the returned O-Auth token
   const login = () => {

@@ -62,9 +62,10 @@ export const FlexColumn = styled.div`
 
 export const Button = styled.button`
   background-color: ${colors.yellow};
-  margin: 0 auto;
+  margin: auto auto;
   width: 200px;
-  padding: 3px;
+  height: 30px;
+  max-height: 70px;
   border-radius: 10px;
 
   &:hover {
@@ -72,11 +73,10 @@ export const Button = styled.button`
   }
 `;
 
-export const WhiteBaseContainer = styled(FlexRow)`
+export const WhiteBaseContainer = styled(FlexColumn)`
   min-height: 100vh;
   height: 100vh;
   max-height: 100vh;
-  top: 0;
 
   align-items: center;
   text-align: center;
