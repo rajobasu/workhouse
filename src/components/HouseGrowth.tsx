@@ -15,7 +15,7 @@ export const HouseGrowth: React.FC<Props> = ({
 }) => {
   return (
     <Container>
-      <HouseAnimation progressValue={progressValue} targetValue={targetValue} />
+      <HouseAnimation />
       <ProgressBar progressValue={progressValue} targetValue={targetValue} />
     </Container>
   );

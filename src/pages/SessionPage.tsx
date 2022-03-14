@@ -78,7 +78,8 @@ export const SessionPage: React.FC = () => {
 
   const updateProgress = () => {
     console.log("trying to update");
-    const newValue = (progressValue) => progressValue + 0.2 + getRandomInt(1);
+    const newValue = (progressValue) =>
+      progressValue + 0.2 + Math.floor(getRandomInt(1) * 100) / 100;
     setProgressValue(newValue);
   };
 
