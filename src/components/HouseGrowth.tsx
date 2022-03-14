@@ -22,5 +22,5 @@ export const HouseGrowth: React.FC<Props> = ({
 };
 
 const Container = styled(FlexColumn)`
-  width: 100px;
+  width: 400px;
 `;

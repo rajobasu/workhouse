@@ -18,7 +18,7 @@ export const ProgressBar: React.FC<Props> = ({
   );
 };
 const Container = styled.div`
-  height: 7px;
+  height: 10px;
   width: 100%;
   position: relative;
 `;

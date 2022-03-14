@@ -3,6 +3,11 @@ import styled from "styled-components";
 export const colors = {
   black: "#000000",
   blackLight: "#A9ABB4",
+  darkBlue: "#1e009f",
+  lightBlue: "#4285F4",
+  white: "#FFFFFF",
+  yellow: "#ebb134",
+  lightYellow: "#ffd77a",
 };
 
 export const margins = {
@@ -33,11 +38,14 @@ export interface TextType {
 
 export const Text = styled.p<TextType>`
   color: ${(p) => p.color || colors.black};
-  margin-bottom: ${margins.size2};
+  font-size: 20px;
 `;
 
 export const FlexRow = styled.div`
   display: flex;
+  align-items: center;
+  align-content: center;
+  text-align: center;
   flex-direction: row;
   justify-content: flex-start;
   padding: 10px;
@@ -45,7 +53,22 @@ export const FlexRow = styled.div`
 
 export const FlexColumn = styled.div`
   display: flex;
+  align-items: center;
+  align-content: center;
+  text-align: center;
   flex-direction: column;
   justify-content: flex-start;
   padding: 10px;
+`;
+
+export const Button = styled.button`
+  background-color: ${colors.yellow};
+  margin: 0 auto;
+  width: 200px;
+  padding: 3px;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: ${colors.lightYellow};
+  }
 `;

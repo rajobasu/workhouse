@@ -1,10 +1,19 @@
 import React from "react";
-import { Text, WhiteBaseContainer } from "../css/css";
+import { Button, FlexColumn, FlexRow, Text } from "../css/css";
+import { HouseGrowth } from "../components/HouseGrowth";
 
 export const SessionPage: React.FC = () => {
   return (
-    <WhiteBaseContainer>
-      <Text>This is the volunteer page.</Text>
-    </WhiteBaseContainer>
+    <FlexColumn>
+      <HouseGrowth progressValue={1} targetValue={2} />
+      <FlexRow>
+        <Button>
+          <Text>Start</Text>
+        </Button>
+        <Button>
+          <Text>Stop</Text>
+        </Button>
+      </FlexRow>
+    </FlexColumn>
   );
 };

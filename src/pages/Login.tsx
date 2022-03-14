@@ -1,15 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { WhiteBaseContainer } from "../css/css";
-import {useAppContext} from "../context/AppContext"
+import { useAppContext } from "../context/AppContext";
 
 export const Login: React.FC = () => {
-
   const { login, userAcc, logout } = useAppContext();
 
   async function handleLogin(e) {
     e.preventDefault();
-    if(userAcc) {
-      logout()
+    if (userAcc) {
+      logout();
     } else {
       login();
     }
@@ -18,8 +17,8 @@ export const Login: React.FC = () => {
   return (
     <WhiteBaseContainer>
       <button onClick={handleLogin}>
-          {!userAcc && <span>Login</span>}
-          {userAcc && <span>Logout</span>}
+        {!userAcc && <span>Login</span>}
+        {userAcc && <span>Logout</span>}
       </button>
     </WhiteBaseContainer>
   );

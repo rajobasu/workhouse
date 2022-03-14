@@ -12,29 +12,32 @@ import {SessionPage} from "./pages/SessionPage";
 import {MetaMask} from "./pages/MetaMask";
 
 function App() {
+  const AuthenticatedDashboard = () => {
     return (
-        <BrowserRouter>
-            <AppProvider>
-                <Routes>
-                    <Route path={"/"} element={<LandingPage/>}/>
-                    <Route
-                        path={"/dashboard"}
-                        element={
-                            <Authenticate>
-                                <Dashboard/>
-                            </Authenticate>
-                        }
-                    />
-                    <Route path={"/login"} element={<Login/>}/>
-                    <Route path={"/donate"} element={<Donate/>}/>
-                    <Route path={"/volunteer"} element={<Volunteer/>}/>
-                    <Route path={"/metaverse"} element={<Metaverse/>}/>
-                    <Route path={"/metamask"} element={<MetaMask/>}/>
-                    <Route path={"/session"} element={<SessionPage/>}/>
-                </Routes>
-            </AppProvider>
-        </BrowserRouter>
+      <Authenticate>
+        <Dashboard />
+      </Authenticate>
     );
+  };
+
+  return (
+    <BrowserRouter>
+      <AppProvider>
+        <Routes>
+          <Route path={"/"}>
+            <Route index element={<LandingPage />} />
+            <Route path={"dashboard"} element={<AuthenticatedDashboard />} />
+            <Route path={"login"} element={<Login />} />
+            <Route path={"donate"} element={<Donate />} />
+            <Route path={"volunteer"} element={<Volunteer />} />
+            <Route path={"metaverse"} element={<Metaverse />} />
+            <Route path={"/metamask"} element={<MetaMask/>}/>
+            <Route path={"session"} element={<SessionPage />} />
+          </Route>
+        </Routes>
+      </AppProvider>
+    </BrowserRouter>
+  );
 }
 
 export default App;
