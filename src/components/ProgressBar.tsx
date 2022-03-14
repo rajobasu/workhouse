@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../css/css";
+import { colors, margins } from "../css/css";
 
 interface Props {
   progressValue: number;
@@ -12,7 +12,7 @@ export const ProgressBar: React.FC<Props> = ({
   targetValue,
 }) => {
   return (
-    <Container>
+    <Container style={{ marginTop: margins.size3 }}>
       <Background />
       <Progress percent={(progressValue * 100.0) / targetValue} />
     </Container>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  colors,
   FlexColumn,
   FlexRow,
   FullButton,
@@ -119,16 +120,25 @@ export const SessionPage: React.FC = () => {
           margin: "auto",
         }}
       >
-        <Text style={{ fontWeight: "bolder", fontSize: "xxx-large" }}>
+        <Text
+          style={{
+            color: colors.white,
+            fontWeight: "bolder",
+            fontSize: "xxx-large",
+          }}
+        >
           Start your workout Session!
         </Text>
         <HouseGrowth progressValue={progressValue} targetValue={targetValue} />
 
         <FlexRow>
-          <FullButton onClick={startButtonClicked}>
+          <FullButton
+            style={{ minHeight: "40px" }}
+            onClick={startButtonClicked}
+          >
             <Text>Start</Text>
           </FullButton>
-          <FullButton onClick={stopButtonClicked}>
+          <FullButton style={{ minHeight: "40px" }} onClick={stopButtonClicked}>
             <Text>Stop</Text>
           </FullButton>
         </FlexRow>

@@ -2,7 +2,7 @@ import React from "react";
 import {
   colors,
   FlexColumn,
-  FlexRow,
+  FullButton,
   margins,
   Text,
   WhiteBaseContainer,
@@ -10,9 +10,11 @@ import {
 import { getUserLevel } from "../util/util";
 import { useUser } from "../context/AppContext";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export const Dashboard: React.FC = () => {
   const user = useUser();
+  const navigator = useNavigate();
   const progressScore = user.points + 130;
   const nextMileStone = getUserLevel(progressScore)!!;
 
@@ -25,41 +27,33 @@ export const Dashboard: React.FC = () => {
         justifyContent: "space-between",
       }}
     >
-      <FlexRow
+      <FlexColumn
         style={{
           justifyContent: "space-between",
           padding: 0,
           marginTop: margins.size5,
         }}
       >
-        <FlexColumn
-          style={{
-            justifyContent: "space-between",
-            padding: 0,
-            marginRight: margins.size6,
-          }}
-        >
-          <WhiteText>Dashboard</WhiteText>
-          <PostIt>
-            <Text>
-              Welcome to your dashboard,{" "}
-              <span style={{ fontWeight: "bolder" }}>{user.name}</span>
-            </Text>
-            <Text>
-              You are currently at level{" "}
-              <span style={{ fontWeight: "bolder" }}>
-                {nextMileStone.level}
-              </span>
-              , and need{" "}
-              <span style={{ fontWeight: "bolder" }}>
-                {nextMileStone.targetScore - progressScore}
-              </span>{" "}
-              to get to the next milestone.
-            </Text>
-          </PostIt>
-        </FlexColumn>
-        <PostIt style={{ height: "80vh" }} />
-      </FlexRow>
+        <WhiteText>Dashboard</WhiteText>
+        <PostIt>
+          <Text>
+            Welcome to your dashboard,{" "}
+            <span style={{ fontWeight: "bolder" }}>{user.name}</span>
+          </Text>
+          <Text>
+            You are currently at level{" "}
+            <span style={{ fontWeight: "bolder" }}>{nextMileStone.level}</span>,
+            and need{" "}
+            <span style={{ fontWeight: "bolder" }}>
+              {nextMileStone.targetScore - progressScore}
+            </span>{" "}
+            to get to the next milestone.
+          </Text>
+        </PostIt>
+        <FullButton onClick={() => navigator("/metamask")}>
+          Check out your NFTs!
+        </FullButton>
+      </FlexColumn>
     </WhiteBaseContainer>
   );
 };

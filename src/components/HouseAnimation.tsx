@@ -1,17 +1,9 @@
 import React from "react";
 import { margins } from "../css/css";
 import styled from "styled-components";
-import house1 from "../res/images/house1.png";
+import house1 from "../res/images/black_house.png";
 
-interface Props {
-  progressValue: number;
-  targetValue: number;
-}
-
-export const HouseAnimation: React.FC<Props> = ({
-  progressValue,
-  targetValue,
-}) => {
+export const HouseAnimation: React.FC = () => {
   return <HouseImage src={house1} />;
 };
 
