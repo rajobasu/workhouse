@@ -55,6 +55,17 @@ export const SessionPage: React.FC = () => {
     setShowInfoModal(false);
   };
 
+  const updateTarget = () => {
+    const newValue = (targetValue) => targetValue * 10;
+    setTargetValue(newValue);
+  };
+
+  useEffect(() => {
+    if (progressValue >= targetValue) {
+      updateTarget();
+    }
+  }, [progressValue, targetValue]);
+
   const updateProgress = () => {
     const newValue = (progressValue) => progressValue + 0.2 + getRandomInt(1);
     setProgressValue(newValue);
