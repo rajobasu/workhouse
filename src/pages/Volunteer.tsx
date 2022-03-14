@@ -93,6 +93,29 @@ export const Volunteer = () => {
   return (
     <WhiteBaseContainer style={{ backgroundColor: colors.black }}>
       <FlexColumn>
+        <CellText
+          style={{
+            width: "100%",
+            height: "80px",
+            fontWeight: "bolder",
+            fontSize: "xxx-large",
+          }}
+        >
+          Volunteer!
+        </CellText>
+        <CellText style={{ maxWidth: "600px" }}>
+          We have the following volunteering opportunities in the near future!
+          Not only will you be helping the needier sections of the society in
+          their search for a decent housing, but you would also be helping
+          yourself by burning a lot of calories and getting that workout in that
+          you have been wanting to!
+        </CellText>
+
+        <CellText style={{ fontSize: "x-large" }}>
+          Every time you volunteer, you earn points, which will lead you to your
+          next NFT milestone!!
+        </CellText>
+
         {
           <FlexRow>
             {columns.map((e) => (
