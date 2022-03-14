@@ -106,7 +106,14 @@ export const AppProvider: React.FC = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ user, updateUser, fetchUser, login, logout, userAcc }}
+      value={{
+        user,
+        updateUser,
+        fetchUser,
+        login,
+        logout,
+        userAcc,
+      }}
     >
       {!loading && children}
     </AppContext.Provider>

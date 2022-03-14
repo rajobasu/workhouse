@@ -10,8 +10,14 @@ import {
 } from "../css/css";
 import logo from "../res/images/logo.png";
 import tagline from "../res/images/tagline_white.jpeg";
+import { useNavigate } from "react-router";
 
 export const LandingPage: React.FC = () => {
+  const navigator = useNavigate();
+  const redirectToSessionPage = () => {
+    navigator("/session");
+  };
+
   return (
     <BackgroundContainer
       style={{
@@ -49,8 +55,8 @@ export const LandingPage: React.FC = () => {
           </FlexColumn>
         </FlexRow>
 
-        <SessionButton>
-          <Text>Start a Session!</Text>
+        <SessionButton onClick={redirectToSessionPage}>
+          <Text>Start a Workout Session!</Text>
         </SessionButton>
       </FlexColumn>
     </BackgroundContainer>
