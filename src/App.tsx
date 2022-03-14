@@ -4,7 +4,6 @@ import { AppProvider } from "./context/AppContext";
 import { LandingPage } from "./pages/LandingPage";
 import { Dashboard } from "./pages/Dashboard";
 import { Login } from "./pages/Login";
-import { Donate } from "./pages/Donate";
 import { Volunteer } from "./pages/Volunteer";
 import { Metaverse } from "./pages/Metaverse";
 import { Authenticate } from "./pages/Authenticate";
@@ -30,7 +29,6 @@ function App() {
               <Route index element={<LandingPage />} />
               <Route path={"dashboard"} element={<AuthenticatedDashboard />} />
               <Route path={"login"} element={<Login />} />
-              <Route path={"donate"} element={<Donate />} />
               <Route path={"volunteer"} element={<Volunteer />} />
               <Route path={"metaverse"} element={<Metaverse />} />
               <Route path={"/metamask"} element={<MetaMask />} />

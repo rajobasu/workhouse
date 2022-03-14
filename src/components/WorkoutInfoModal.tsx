@@ -40,7 +40,7 @@ export const WorkoutInfoModal: React.FC<Props> = ({
           {donationMatched} for the cause!
         </Text>
         <FlexRow>
-          <Button onClick={() => navigator("/donate")}>
+          <Button onClick={() => {window.location.href = 'https://give.asia/charity/habitat_for_humanity_singapore'}}>
             <Text>Donate!</Text>
           </Button>
           <Button onClick={() => navigator("/volunteer")}>
