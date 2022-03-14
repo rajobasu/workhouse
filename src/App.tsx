@@ -7,19 +7,28 @@ import { Login } from "./pages/Login";
 import { Donate } from "./pages/Donate";
 import { Volunteer } from "./pages/Volunteer";
 import { Metaverse } from "./pages/Metaverse";
-import { Authenticate } from "./pages/Authenticate";
 import { SessionPage } from "./pages/SessionPage";
 import { MetaMask } from "./pages/MetaMask";
 import { NotifProvider } from "./context/notif-context";
 
 function App() {
-  const AuthenticatedDashboard = () => {
-    return (
-      <Authenticate>
-        <Dashboard />
-      </Authenticate>
-    );
-  };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // const AuthenticatedDashboard = () => {
+  //   return (
+  //     <Authenticate>
+  //       <Dashboard />
+  //     </Authenticate>
+  //   );
+  // };
+  //
+  // // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // const AuthenticatedSessionPage = () => {
+  //   return (
+  //     <Authenticate>
+  //       <SessionPage />
+  //     </Authenticate>
+  //   );
+  // };
 
   return (
     <BrowserRouter>
@@ -28,7 +37,7 @@ function App() {
           <Routes>
             <Route path={"/"}>
               <Route index element={<LandingPage />} />
-              <Route path={"dashboard"} element={<AuthenticatedDashboard />} />
+              <Route path={"dashboard"} element={<Dashboard />} />
               <Route path={"login"} element={<Login />} />
               <Route path={"donate"} element={<Donate />} />
               <Route path={"volunteer"} element={<Volunteer />} />
