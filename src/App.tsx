@@ -9,27 +9,35 @@ import { Volunteer } from "./pages/Volunteer";
 import { Metaverse } from "./pages/Metaverse";
 import { Authenticate } from "./pages/Authenticate";
 import { SessionPage } from "./pages/SessionPage";
+import { MetaMask } from "./pages/MetaMask";
+import { NotifProvider } from "./context/notif-context";
 
 function App() {
+  const AuthenticatedDashboard = () => {
+    return (
+      <Authenticate>
+        <Dashboard />
+      </Authenticate>
+    );
+  };
+
   return (
     <BrowserRouter>
       <AppProvider>
-        <Routes>
-          <Route path={"/"} element={<LandingPage />} />
-          <Route
-            path={"/dashboard"}
-            element={
-              <Authenticate>
-                <Dashboard />
-              </Authenticate>
-            }
-          />
-          <Route path={"/login"} element={<Login />} />
-          <Route path={"/donate"} element={<Donate />} />
-          <Route path={"/volunteer"} element={<Volunteer />} />
-          <Route path={"/metaverse"} element={<Metaverse />} />
-          <Route path={"/session"} element={<SessionPage />} />
-        </Routes>
+        <NotifProvider>
+          <Routes>
+            <Route path={"/"}>
+              <Route index element={<LandingPage />} />
+              <Route path={"dashboard"} element={<AuthenticatedDashboard />} />
+              <Route path={"login"} element={<Login />} />
+              <Route path={"donate"} element={<Donate />} />
+              <Route path={"volunteer"} element={<Volunteer />} />
+              <Route path={"metaverse"} element={<Metaverse />} />
+              <Route path={"/metamask"} element={<MetaMask />} />
+              <Route path={"session"} element={<SessionPage />} />
+            </Route>
+          </Routes>
+        </NotifProvider>
       </AppProvider>
     </BrowserRouter>
   );
