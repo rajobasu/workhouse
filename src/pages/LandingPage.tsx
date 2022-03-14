@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  Button,
   FlexColumn,
   FlexRow,
+  FullButton,
   margins,
   Text,
   WhiteBaseContainer,
@@ -110,7 +110,7 @@ const Descriptor = styled(Text)`
   width: 100%;
 `;
 
-const SessionButton = styled(Button)`
+const SessionButton = styled(FullButton)`
   margin-top: ${margins.size6};
   width: 300px;
   height: 100%;

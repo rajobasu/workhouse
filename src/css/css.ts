@@ -104,4 +104,5 @@ export const Clickable = styled.button`
 
 export const FullButton = styled(Button)`
   height: 100%;
+  min-height: 60px;
 `;
