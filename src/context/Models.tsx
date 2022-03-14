@@ -9,7 +9,7 @@ export const emptyUser: UserProfile = {
   name: "",
   email: "",
   points: 0,
-  verified: 1,
+  verified: -1,
 };
 
 export interface PostUserInfoPayload {

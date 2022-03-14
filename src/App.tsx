@@ -10,42 +10,52 @@ import { Metaverse } from "./pages/Metaverse";
 import { SessionPage } from "./pages/SessionPage";
 import { MetaMask } from "./pages/MetaMask";
 import { NotifProvider } from "./context/notif-context";
+import { Authenticate } from "./pages/Authenticate";
+import { Navbar } from "./components/Navbar";
+import { WhiteBaseContainer } from "./css/css";
 
 function App() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const AuthenticatedDashboard = () => {
-  //   return (
-  //     <Authenticate>
-  //       <Dashboard />
-  //     </Authenticate>
-  //   );
-  // };
-  //
-  // // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const AuthenticatedSessionPage = () => {
-  //   return (
-  //     <Authenticate>
-  //       <SessionPage />
-  //     </Authenticate>
-  //   );
-  // };
+  const AuthenticatedDashboard = () => {
+    return (
+      <Authenticate>
+        <Dashboard />
+      </Authenticate>
+    );
+  };
+
+  const AuthenticatedSessionPage = () => {
+    return (
+      <Authenticate>
+        <SessionPage />
+      </Authenticate>
+    );
+  };
 
   return (
     <BrowserRouter>
       <AppProvider>
         <NotifProvider>
-          <Routes>
-            <Route path={"/"}>
-              <Route index element={<LandingPage />} />
-              <Route path={"dashboard"} element={<Dashboard />} />
-              <Route path={"login"} element={<Login />} />
-              <Route path={"donate"} element={<Donate />} />
-              <Route path={"volunteer"} element={<Volunteer />} />
-              <Route path={"metaverse"} element={<Metaverse />} />
-              <Route path={"/metamask"} element={<MetaMask />} />
-              <Route path={"session"} element={<SessionPage />} />
-            </Route>
-          </Routes>
+          <WhiteBaseContainer>
+            <Navbar />
+            <Routes>
+              <Route path={"/"}>
+                <Route index element={<LandingPage />} />
+                <Route
+                  path={"dashboard"}
+                  element={<AuthenticatedDashboard />}
+                />
+                <Route path={"login"} element={<Login />} />
+                <Route path={"donate"} element={<Donate />} />
+                <Route path={"volunteer"} element={<Volunteer />} />
+                <Route path={"metaverse"} element={<Metaverse />} />
+                <Route path={"/metamask"} element={<MetaMask />} />
+                <Route
+                  path={"session"}
+                  element={<AuthenticatedSessionPage />}
+                />
+              </Route>
+            </Routes>
+          </WhiteBaseContainer>
         </NotifProvider>
       </AppProvider>
     </BrowserRouter>

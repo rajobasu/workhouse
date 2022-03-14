@@ -62,9 +62,10 @@ export const FlexColumn = styled.div`
 
 export const Button = styled.button`
   background-color: ${colors.yellow};
-  margin: 0 auto;
+  margin: auto auto;
   width: 200px;
-  padding: 3px;
+  height: 30px;
+  max-height: 70px;
   border-radius: 10px;
 
   &:hover {

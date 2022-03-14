@@ -17,13 +17,15 @@ export const LandingPage: React.FC = () => {
   const redirectToSessionPage = () => {
     navigator("/session");
   };
+  const redirectToDashboardPage = () => {
+    navigator("/dashboard");
+  };
 
   return (
     <BackgroundContainer
       style={{
         margin: 0,
         paddingTop: 0,
-        paddingBottom: "-20px",
         // backgroundImage: `url(${background})`,
         backgroundColor: "black",
         backgroundSize: "100%",
@@ -55,9 +57,14 @@ export const LandingPage: React.FC = () => {
           </FlexColumn>
         </FlexRow>
 
-        <SessionButton onClick={redirectToSessionPage}>
-          <Text>Start a Workout Session!</Text>
-        </SessionButton>
+        <FlexRow>
+          <SessionButton onClick={redirectToDashboardPage}>
+            <Text>Go to your dashboard!</Text>
+          </SessionButton>
+          <SessionButton onClick={redirectToSessionPage}>
+            <Text>Start a Workout Session!</Text>
+          </SessionButton>
+        </FlexRow>
       </FlexColumn>
     </BackgroundContainer>
   );
@@ -97,4 +104,7 @@ const Descriptor = styled(Text)`
 const SessionButton = styled(Button)`
   margin-top: ${margins.size6};
   width: 300px;
+  height: 100%;
+  margin-right: ${margins.size3};
+  margin-left: ${margins.size3};
 `;
