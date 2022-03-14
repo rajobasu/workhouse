@@ -66,19 +66,19 @@ export const SessionPage: React.FC = () => {
   }, [progressValue]);
 
   useEffect(() => {
-    if (sessionInProgress) {
+    if (sessionInProgress && currentInterval === undefined) {
       // new session is started
       const intervalId = setInterval(updateProgress, 1000);
       setCurrentInterval(intervalId);
       return () => clearInterval(intervalId);
-    } else {
+    } else if (!sessionInProgress && currentInterval !== undefined) {
       // last session is stopped
       if (currentInterval) {
         clearInterval(currentInterval);
         setCurrentInterval(undefined);
       }
     }
-  }, [sessionInProgress]);
+  }, [sessionInProgress, currentInterval]);
 
   return (
     <WhiteBaseContainer>
