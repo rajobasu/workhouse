@@ -17,8 +17,8 @@ const noop = () => {
 
 const AppContext = createContext<{
   user: UserProfile | undefined;
-  updateUser: (userInfo: PostUserInfoPayload) => Promise<UserProfile>;
-  fetchUser: () => Promise<UserProfile>;
+  updateUser: (userInfo: PostUserInfoPayload) => void;
+  fetchUser: () => void;
   login: () => void;
   logout: () => void;
   userAcc: any | undefined;
