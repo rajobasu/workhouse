@@ -24,7 +24,10 @@ export const LoginButton: React.FC = () => {
   }
 
   return (
-    <Button onClick={handleLogin} style={{ maxWidth: "200px", margin: 0 }}>
+    <Button
+      onClick={handleLogin}
+      style={{ maxWidth: "200px", margin: 0, height: "40px" }}
+    >
       {user.verified === -1 && <span>Login</span>}
       {user.verified === 1 && <span>Logout</span>}
     </Button>

@@ -1,10 +1,13 @@
 import React from "react";
-import { colors, FlexRow, Text } from "../css/css";
+import { Button, colors, FlexRow, Text } from "../css/css";
 import { useUser } from "../context/AppContext";
 import { LoginButton } from "../pages/Login";
+import styled from "styled-components";
+import { useNavigate } from "react-router";
 
 export const Navbar: React.FC = () => {
   const user = useUser();
+  const navigator = useNavigate();
   return (
     <FlexRow
       style={{
@@ -19,10 +22,29 @@ export const Navbar: React.FC = () => {
         margin: 0,
       }}
     >
-      <Text style={{ fontWeight: "bolder", color: colors.white }}>
-        {user.name || "Login To Continue"}
-      </Text>
-      <LoginButton />
+      <FlexRow style={{ padding: 0, margin: 0 }}>
+        <Text style={{ fontWeight: "bolder", color: colors.white }}>
+          {user.name || "Login To Continue"}
+        </Text>
+      </FlexRow>
+      <FlexRow style={{ padding: 0, margin: 0 }}>
+        {user.verified === 1 && (
+          <>
+            <RoundButton onClick={() => navigator("/")}>L</RoundButton>
+            <RoundButton onClick={() => navigator("/dashboard")}>D</RoundButton>
+            <RoundButton onClick={() => navigator("/session")}>S</RoundButton>
+            <RoundButton onClick={() => navigator("/volunteer")}>V</RoundButton>
+          </>
+        )}
+        <LoginButton />
+      </FlexRow>
     </FlexRow>
   );
 };
+
+const RoundButton = styled(Button)`
+  border-radius: 50%;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+`;
