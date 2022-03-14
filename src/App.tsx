@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
 import { LandingPage } from "./pages/LandingPage";
 import { Dashboard } from "./pages/Dashboard";
-import { Login } from "./pages/Login";
 import { Volunteer } from "./pages/Volunteer";
 import { Authenticate } from "./pages/Authenticate";
 import { SessionPage } from "./pages/SessionPage";
@@ -30,6 +29,14 @@ function App() {
     );
   };
 
+  const AuthenticatedMetaMaskPage = () => {
+    return (
+      <Authenticate>
+        <MetaMask />
+      </Authenticate>
+    );
+  };
+
   return (
     <BrowserRouter>
       <AppProvider>
@@ -43,9 +50,11 @@ function App() {
                   path={"dashboard"}
                   element={<AuthenticatedDashboard />}
                 />
-                <Route path={"login"} element={<Login />} />
                 <Route path={"volunteer"} element={<Volunteer />} />
-                <Route path={"/metamask"} element={<MetaMask />} />
+                <Route
+                  path={"/metamask"}
+                  element={<AuthenticatedMetaMaskPage />}
+                />
                 <Route
                   path={"session"}
                   element={<AuthenticatedSessionPage />}
