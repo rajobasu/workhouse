@@ -74,11 +74,10 @@ export const Button = styled.button`
 `;
 
 export const WhiteBaseContainer = styled(FlexColumn)`
-  min-height: 90vh;
+  min-height: 100vh;
   height: 100vh;
   max-height: 100vh;
 
-  padding: 5px;
   align-items: center;
   text-align: center;
   horiz-align: center;
@@ -86,6 +85,10 @@ export const WhiteBaseContainer = styled(FlexColumn)`
   width: 100vw;
   max-width: 100vw;
   overflow: hidden;
+
+  padding: 0;
+  margin: 0;
+  background-color: ${colors.black};
 `;
 
 export const Clickable = styled.button`
@@ -97,4 +100,8 @@ export const Clickable = styled.button`
   outline: none;
   padding: 0;
   flex-shrink: 0;
+`;
+
+export const FullButton = styled(Button)`
+  height: 100%;
 `;

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { colors } from "../css/css";
 
 interface Props {
   progressValue: number;
@@ -33,11 +34,11 @@ const BaseBox = styled.div`
 `;
 
 const Background = styled(BaseBox)`
-  background: grey;
+  background: white;
   width: 100%;
 `;
 
 const Progress = styled(BaseBox)`
-  background: blue;
+  background: ${colors.lightGreen};
   width: ${({ percent }) => percent}%;
 `;

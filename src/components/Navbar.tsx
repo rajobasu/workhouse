@@ -20,10 +20,13 @@ export const Navbar: React.FC = () => {
         backgroundColor: "#231f1f",
         borderBottom: "2px solid orange",
         margin: 0,
+        overflow: "hidden",
       }}
     >
       <FlexRow style={{ padding: 0, margin: 0 }}>
-        <Text style={{ fontWeight: "bolder", color: colors.white }}>
+        <Text
+          style={{ fontWeight: "bolder", color: colors.white, padding: "10px" }}
+        >
           {user.name || "Login To Continue"}
         </Text>
       </FlexRow>

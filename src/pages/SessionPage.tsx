@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
   FlexColumn,
   FlexRow,
+  FullButton,
   Text,
   WhiteBaseContainer,
 } from "../css/css";
 import { HouseGrowth } from "../components/HouseGrowth";
 import { useNotifContext } from "../context/notif-context";
 import { WorkoutInfoModal } from "../components/WorkoutInfoModal";
+import { useAppContext, useUser } from "../context/AppContext";
+import { getUserLevel } from "../util/util";
 
 function getRandomInt(max) {
   return Math.random() * max;
 }
 
 export const SessionPage: React.FC = () => {
-  const [progressValue, setProgressValue] = useState(0); // we will also get this from the user level
-  const [targetValue, setTargetValue] = useState(100); // we ideally get this from the user level
+  const user = useUser();
+  const [progressValue, setProgressValue] = useState(user.points); // we will also get this from the user level
+  const nextTarget = getUserLevel(user.points)?.targetScore!!;
+  const [targetValue, setTargetValue] = useState(nextTarget); // we ideally get this from the user level
   const [initialProgress, setInitialProgress] = useState(0);
   const [sessionInProgress, setSessionInProgress] = useState(false);
   const [currentInterval, setCurrentInterval] = useState<
@@ -24,6 +28,8 @@ export const SessionPage: React.FC = () => {
   >(undefined);
   const { showNotif } = useNotifContext();
   const [showInfoModal, setShowInfoModal] = useState(false);
+
+  const { updateUser, fetchUser } = useAppContext();
 
   const startButtonClicked = () => {
     if (sessionInProgress) {
@@ -38,7 +44,7 @@ export const SessionPage: React.FC = () => {
     setInitialProgress(progressValue);
   };
 
-  const stopButtonClicked = () => {
+  const stopButtonClicked = async () => {
     if (!sessionInProgress) {
       return;
     }
@@ -48,6 +54,8 @@ export const SessionPage: React.FC = () => {
     });
     setSessionInProgress(false);
     // we do a bunch of other stuff here.
+    await updateUser({ points: Math.floor(progressValue * 100) / 100 });
+    await fetchUser();
     setShowInfoModal(true);
   };
 
@@ -111,15 +119,18 @@ export const SessionPage: React.FC = () => {
           margin: "auto",
         }}
       >
+        <Text style={{ fontWeight: "bolder", fontSize: "xxx-large" }}>
+          Start your workout Session!
+        </Text>
         <HouseGrowth progressValue={progressValue} targetValue={targetValue} />
 
         <FlexRow>
-          <Button onClick={startButtonClicked}>
+          <FullButton onClick={startButtonClicked}>
             <Text>Start</Text>
-          </Button>
-          <Button onClick={stopButtonClicked}>
+          </FullButton>
+          <FullButton onClick={stopButtonClicked}>
             <Text>Stop</Text>
-          </Button>
+          </FullButton>
         </FlexRow>
       </FlexColumn>
       {showInfoModal && (

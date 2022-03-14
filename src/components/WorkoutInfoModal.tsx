@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "../Modal";
-import { Button, FlexColumn, FlexRow, Text } from "../css/css";
+import { FlexColumn, FlexRow, FullButton, Text } from "../css/css";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -40,12 +40,17 @@ export const WorkoutInfoModal: React.FC<Props> = ({
           {donationMatched} for the cause!
         </Text>
         <FlexRow>
-          <Button onClick={() => {window.location.href = 'https://give.asia/charity/habitat_for_humanity_singapore'}}>
+          <FullButton
+            onClick={() => {
+              window.location.href =
+                "https://give.asia/charity/habitat_for_humanity_singapore";
+            }}
+          >
             <Text>Donate!</Text>
-          </Button>
-          <Button onClick={() => navigator("/volunteer")}>
+          </FullButton>
+          <FullButton onClick={() => navigator("/volunteer")}>
             <Text> Volunteer! </Text>
-          </Button>
+          </FullButton>
         </FlexRow>
       </FlexColumn>
     </Modal>

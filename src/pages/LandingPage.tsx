@@ -11,6 +11,7 @@ import {
 import logo from "../res/images/logo.png";
 import tagline from "../res/images/tagline_white.jpeg";
 import { useNavigate } from "react-router";
+import logoText from "../res/images/logotext.png";
 
 export const LandingPage: React.FC = () => {
   const navigator = useNavigate();
@@ -34,7 +35,11 @@ export const LandingPage: React.FC = () => {
       }}
     >
       <FlexColumn style={{ marginTop: margins.size5 }}>
-        <Logo src={logo} />
+        <FlexRow>
+          <Logo src={logo} />
+          <LogoText src={logoText} />
+        </FlexRow>
+
         <FlexRow>
           <Tagline src={tagline} />
           <FlexColumn
@@ -87,6 +92,10 @@ const Logo = styled.img`
 const Tagline = styled.img`
   width: 400px;
   height: 200px;
+`;
+const LogoText = styled.img`
+  width: 80%;
+  height: 100px;
 `;
 
 const Descriptor = styled(Text)`
