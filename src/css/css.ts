@@ -74,13 +74,16 @@ export const Button = styled.button`
 `;
 
 export const WhiteBaseContainer = styled(FlexColumn)`
-  min-height: 100vh;
+  min-height: 90vh;
   height: 100vh;
   max-height: 100vh;
 
+  padding: 5px;
   align-items: center;
   text-align: center;
   horiz-align: center;
+
+  width: 100vw;
   max-width: 100vw;
   overflow: hidden;
 `;

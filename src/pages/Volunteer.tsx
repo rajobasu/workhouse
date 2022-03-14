@@ -1,38 +1,38 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+import * as React from "react";
+import {
+  colors,
+  FlexColumn,
+  FlexRow,
+  Text,
+  WhiteBaseContainer,
+} from "../css/css";
+import styled from "styled-components";
 
 interface Column {
-  id: 'name' | 'date' | 'address' | 'shift' | 'calories';
+  id: "name" | "date" | "address" | "shift" | "calories";
   label: string;
   minWidth?: number;
-  align?: 'center';
+  align?: "center";
   format?: (value: number) => string;
 }
 
 const columns: readonly Column[] = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'date', label: 'Date', minWidth: 100 },
+  { id: "name", label: "Name", minWidth: 100 },
+  { id: "date", label: "Date", minWidth: 100 },
   {
-    id: 'address',
-    label: 'Address',
-    minWidth: 170,
+    id: "address",
+    label: "Address",
+    minWidth: 300,
   },
   {
-    id: 'shift',
-    label: 'Shift',
-    minWidth: 170,
+    id: "shift",
+    label: "Shift",
+    minWidth: 100,
   },
   {
-    id: 'calories',
-    label: 'Calories Burnt',
-    minWidth: 170,
+    id: "calories",
+    label: "Calories Burnt",
+    minWidth: 100,
   },
 ];
 
@@ -55,72 +55,78 @@ function createData(
 }
 
 const rows = [
-  createData('Hougang', '01/04/2022 - 30/04/2022', '95 Hougang Avenue 4 Hougang Swimming Complex Singapore 538830', 'Multiple Shifts', 450),
-  createData('Sengkang', '10/04/2022 - 15/04/2022', '57 Anchorvale Road #02-07 Sengkang Active Health Lab Singapore 544964', '10am - 6pm', 200)
+  createData(
+    "Hougang",
+    "01/04/2022 - 30/04/2022",
+    "95 Hougang Avenue 4 Hougang Swimming Complex Singapore 538830",
+    "Multiple Shifts",
+    450
+  ),
+  createData(
+    "Sengkang",
+    "10/04/2022 - 15/04/2022",
+    "57 Anchorvale Road #02-07 Sengkang Active Health Lab Singapore 544964",
+    "10am - 6pm",
+    200
+  ),
 ];
 
 export const Volunteer = () => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
+  const style1 = {
+    width: "100px",
+    maxWidth: "300px",
+    border: "0.5px solid white",
+    margin: "0.5px",
+    padding: "5px",
+    height: "80px",
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const style3 = {
+    width: "300px",
+    maxWidth: "300px",
+    border: "0.5px solid white",
+    margin: "0.5px",
+    padding: "5px",
+    height: "80px",
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: '100%' }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead >
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                  color='black'
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+    <WhiteBaseContainer style={{ backgroundColor: colors.black }}>
+      <FlexColumn>
+        {
+          <FlexRow>
+            {columns.map((e) => (
+              <CellText
+                style={{
+                  width: e.minWidth,
+                  maxWidth: e.minWidth,
+                  margin: "0.5px",
+                  padding: "5px",
+                }}
+              >
+                {e.label}
+              </CellText>
+            ))}
+          </FlexRow>
+        }
+        {rows.map((e) => {
+          return (
+            <FlexRow>
+              <CellText style={style1}>{e.name}</CellText>
+              <CellText style={style1}>{e.date}</CellText>
+              <CellText style={style3}>{e.address}</CellText>
+              <CellText style={style1}>{e.shift}</CellText>
+              <CellText style={style1}>{e.calories}</CellText>
+            </FlexRow>
+          );
+        })}
+      </FlexColumn>
+    </WhiteBaseContainer>
   );
-}
+};
+
+const CellText = styled(Text)`
+  font-weight: bolder;
+  font-size: large;
+  color: ${colors.white};
+`;
