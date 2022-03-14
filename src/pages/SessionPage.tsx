@@ -62,11 +62,13 @@ export const SessionPage: React.FC = () => {
 
   useEffect(() => {
     if (progressValue >= targetValue) {
+      console.log("how can this be?");
       updateTarget();
     }
   }, [progressValue, targetValue]);
 
   const updateProgress = () => {
+    console.log("trying to update");
     const newValue = (progressValue) => progressValue + 0.2 + getRandomInt(1);
     setProgressValue(newValue);
   };
@@ -77,19 +79,27 @@ export const SessionPage: React.FC = () => {
   }, [progressValue]);
 
   useEffect(() => {
+    console.log(sessionInProgress);
+    console.log(currentInterval);
     if (sessionInProgress && currentInterval === undefined) {
       // new session is started
+      console.log("this is first");
       const intervalId = setInterval(updateProgress, 1000);
       setCurrentInterval(intervalId);
-      return () => clearInterval(intervalId);
     } else if (!sessionInProgress && currentInterval !== undefined) {
       // last session is stopped
+      console.log("this was also called??");
       if (currentInterval) {
         clearInterval(currentInterval);
-        setCurrentInterval(undefined);
       }
     }
   }, [sessionInProgress, currentInterval]);
+
+  useEffect(() => {
+    if (!sessionInProgress) {
+      setCurrentInterval(undefined);
+    }
+  }, [sessionInProgress]);
 
   return (
     <WhiteBaseContainer>
